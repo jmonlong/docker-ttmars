@@ -8,7 +8,7 @@ The docker container has everything needed to run [TT-Mars](https://github.com/C
 I also tweaked some of the helper scripts to:
 - work when TT-Mars is installed somewhere else
 - be able to specify the threads used during the LRA alignment
-- work with genomes other than hg38 or hg19 (inc. to work on a small toy example).
+- work with genomes other than hg38 or hg19 (inc. to work on a small toy example below).
 
 In the container, the original TT-Mars scripts are in `/build/TT-Mars`.
 The tweaked scripts are in `/build/TT-Mars-tweaked`.
@@ -31,12 +31,12 @@ If you have all the input files ready, run:
 python /build/TT-Mars/combine.py output_dir num_X_chr
 ```
 
-If you only have the refernece fasta, the phased truth assemblies, the VCF to evaluate, the centromere file, and the tandem repeat file, you can make the other 6 required input files using `/build/TT-Mars-tweaked/liftover.sh` (see *Test on toy example* below).
+If you only have the reference fasta, the phased truth assemblies, the VCF to evaluate, the centromere file, and the tandem repeat file, you can make the other 6 required input files using `/build/TT-Mars-tweaked/liftover.sh` (see *Test on toy example* below).
 
 ## Test on toy example
 
-We make a small toy dataset to test that container has everything installed and working.
-In short, simulate some reference sequence and two haplotypes. 
+We make a small toy dataset to test that the container has everything installed and working.
+In short, we simulate some reference sequence and two haplotypes. 
 Then simulate an homozygous deletion, and an heterozygous insertion than is "split" in three pieces in the assembly.
 Also creates some dummy files for the other required files that are not made by `liftover.sh`.
 See [make-test-data.py](make-test-data.py) for more details (requires Python with *biopython*).
