@@ -5,13 +5,7 @@ The docker container has everything needed to run [TT-Mars](https://github.com/C
 - samtools
 - samLiftOver from [mcutils](https://github.com/mchaisso/mcutils)
 
-I also tweaked some of the helper scripts to:
-- work when TT-Mars is installed somewhere else
-- be able to specify the threads used during the LRA alignment
-- work with genomes other than hg38 or hg19 (inc. to work on a small toy example below).
-
-In the container, the original TT-Mars scripts are in `/build/TT-Mars`.
-The tweaked scripts are in `/build/TT-Mars-tweaked`.
+I'm using a [forked version of TT-Mars](https://github.com/jmonlong/TT-Mars) where I made some changes to make it less "hard-coded" for hg19/38. 
 
 ## Run
 
@@ -31,7 +25,7 @@ If you have all the input files ready, run:
 python /build/TT-Mars/combine.py output_dir num_X_chr
 ```
 
-If you only have the reference fasta, the phased truth assemblies, the VCF to evaluate, the centromere file, and the tandem repeat file, you can make the other 6 required input files using `/build/TT-Mars-tweaked/liftover.sh` (see *Test on toy example* below).
+If you only have the reference fasta, the phased truth assemblies, the VCF to evaluate, the centromere file, and the tandem repeat file, you can make the other 6 required input files using `/build/TT-Mars/liftover.sh` (see *Test on toy example* below).
 
 ## Test on toy example
 
@@ -56,7 +50,7 @@ docker run -it -v `pwd`:/app -w /app jmonlong-ttmars
 Then, within it:
 
 ```
-h1=hap1.fa h2=hap2.fa reference=ref.fa threads=2 output_dir=test_files sh /build/TT-Mars-tweaked/liftover.sh
+h1=hap1.fa h2=hap2.fa reference=ref.fa threads=2 output_dir=test_files ttmars_dir=/build/TT-Mars sh /build/TT-Mars/liftover.sh
 
 python /build/TT-Mars/ttmars.py test_files centromere_ref.txt \
        test_files/assem1_non_cov_regions.bed test_files/assem2_non_cov_regions.bed \
