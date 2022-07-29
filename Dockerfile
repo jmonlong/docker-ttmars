@@ -36,6 +36,14 @@ RUN conda update -n base -c defaults conda
 
 RUN conda init
 
+## LRA
+RUN conda install -c bioconda lra
+
+## samLiftOver
+RUN git clone https://github.com/mchaisso/mcutils.git && \
+    cd mcutils/src && make && make install
+ENV PATH=/build/mcutils/bin:$PATH
+
 ## TT-Mars
 RUN conda install -c anaconda numpy && \
     conda install -c conda-forge biopython
@@ -44,14 +52,8 @@ RUN conda install -c bioconda pysam && \
     conda install -c bioconda mappy && \
     conda install -c bioconda pybedtools
 
-RUN git clone https://github.com/jmonlong/TT-Mars.git
-
-## LRA
-RUN conda install -c bioconda lra
-
-## samLiftOver
-RUN git clone https://github.com/mchaisso/mcutils.git && \
-    cd mcutils/src && make && make install
-ENV PATH=/build/mcutils/bin:$PATH
+RUN git clone https://github.com/jmonlong/TT-Mars.git && \
+    cd TT-Mars && \
+    git checkout e739cf5dcf7057fc5ff16d0fe59b3d37c6ba89c2
 
 WORKDIR /home
