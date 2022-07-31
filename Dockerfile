@@ -54,6 +54,6 @@ RUN conda install -c bioconda pysam && \
 
 RUN git clone https://github.com/jmonlong/TT-Mars.git && \
     cd TT-Mars && \
-    git checkout e739cf5dcf7057fc5ff16d0fe59b3d37c6ba89c2
+    git checkout 9e8f5399243e400a9d329ca2d5ac7369c54d2a1c
 
 WORKDIR /home
