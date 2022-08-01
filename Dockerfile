@@ -10,6 +10,8 @@ RUN apt-get update \
     wget \
     gcc \ 
     samtools \
+    bcftools \
+    tabix \
     tzdata \
     build-essential \
     bzip2 \
